@@ -84,28 +84,11 @@ foreach($events as $event){
   // display events of the week 
 
   if(strtotime($date_event) >= strtotime($week_array['week_start']) && strtotime($date_event) <= strtotime($week_array['week_end'])){
-    for($i=9;$i<=19;$i++){
-      if($hour_event==$i){
-        if($day_event ==1){
-          $event14_1 = $event[1];
-        }
-        if($day_event ==2){
-          $event14_2 = $event[1];
-        }
-        if($day_event ==3){
-          $event14_3 = $event[1];
-        }
-        if($day_event ==4){
-          $event14_4 = $event[1];
-        }
-        if($day_event ==5){
-          $event14_5 = $event[1];
-        }
-      }
-    }
+    $hour_event=ltrim($hour_event,'0');
+    $ev = "event".$hour_event."_".$day_event; 
+    $$ev = $event[1];       
   }
 }
-
 
 //_________________display PLANNING_________________//
 
@@ -131,90 +114,90 @@ echo"
   <tbody>
   <tr>
   <td>08h - 09h</td> 
-  <td> $event8_1</td>
-  <td> $event8_2</td> 
-  <td> $event8_3</td> 
-  <td> $event8_4</td> 
-  <td> $event8_5</td> 
+  <td> <a href='event.php'>$event8_1</a></td>
+  <td> <a href='event.php'>$event8_2</a></td> 
+  <td> <a href='event.php'>$event8_3</a></td> 
+  <td> <a href='event.php'>$event8_4</a></td> 
+  <td> <a href='event.php'>$event8_5</a></td> 
     </tr>
   <tr>
   <td>09h - 10h</td> 
-  <td> $event9_1</td>
-  <td> $event9_2</td> 
-  <td> $event9_3</td> 
-  <td> $event9_4</td> 
-  <td> $event9_5</td> 
+  <td> <a href='event.php'>$event9_1</a></td>
+  <td> <a href='event.php'>$event9_2</a></td> 
+  <td> <a href='event.php'>$event9_3</a></td> 
+  <td> <a href='event.php'>$event9_4</a></td> 
+  <td> <a href='event.php'>$event9_5</a></td> 
     </tr>
      <tr>
   <td>10h - 11h</td> 
-  <td> $event10_1</td>
-  <td> $event10_2</td> 
-  <td> $event10_3</td> 
-  <td> $event10_4</td> 
-  <td> $event10_5</td> 
+  <td> <a href='event.php'>$event10_1</a></td>
+  <td> <a href='event.php'>$event10_2</a></td> 
+  <td> <a href='event.php'>$event10_3</a></td> 
+  <td> <a href='event.php'>$event10_4</a></td> 
+  <td> <a href='event.php'>$event10_5</a></td> 
     </tr>
    <tr>
   <td>11h - 12h</td> 
-  <td> $event11_1</td>
-  <td> $event11_2</td> 
-  <td> $event11_3</td> 
-  <td> $event11_4</td> 
-  <td> $event11_5</td> 
+  <td> <a href='event.php'>$event11_1</a></td>
+  <td> <a href='event.php'>$event11_2</a></td> 
+  <td> <a href='event.php'>$event11_3</a></td> 
+  <td> <a href='event.php'>$event11_4</a></td> 
+  <td> <a href='event.php'>$event11_5</a></td> 
     </tr>
      <tr>
   <td>12h - 13h</td>
-  <td> $event12_1</td>
-  <td> $event12_2</td> 
-  <td> $event12_3</td> 
-  <td> $event12_4</td> 
-  <td> $event12_5</td>  
+  <td> <a href='event.php'>$event12_1</a></td>
+  <td> <a href='event.php'>$event12_2</a></td> 
+  <td> <a href='event.php'>$event12_3</a></td> 
+  <td> <a href='event.php'>$event12_4</a></td> 
+  <td> <a href='event.php'>$event12_5</a></td>  
     </tr>
   <td>13h - 14h</td> 
-  <td> $event13_1</td>
-  <td> $event13_2</td> 
-  <td> $event13_3</td> 
-  <td> $event13_4</td> 
-  <td> $event13_5</td> 
+  <td> <a href='event.php'>$event13_1</a></td>
+  <td> <a href='event.php'>$event13_2</a></td> 
+  <td> <a href='event.php'>$event13_3</a></td> 
+  <td> <a href='event.php'>$event13_4</a></td> 
+  <td> <a href='event.php'>$event13_5</a></td> 
     </tr>
     <tr>
   <td>14h - 15h</td> 
-  <td> $event14_1</td>
-  <td> $event14_2</td> 
-  <td> $event14_3</td> 
-  <td> $event14_4</td> 
-  <td> $event14_5</td> 
+  <td> <a href='event.php'>$event14_1</a></td>
+  <td> <a href='event.php'>$event14_2</a></td> 
+  <td> <a href='event.php'>$event14_3</a></td> 
+  <td> <a href='event.php'>$event14_4</a></td> 
+  <td> <a href='event.php'>$event14_5</a></td> 
     </tr>
    <tr>
   <td>15h - 16h</td> 
-  <td> $event15_1</td>
-  <td> $event15_2</td> 
-  <td> $event15_3</td> 
-  <td> $event15_4</td> 
-  <td> $event15_5</td> 
+  <td> <a href='event.php'>$event15_1</a></td>
+  <td> <a href='event.php'>$event15_2</a></td> 
+  <td> <a href='event.php'>$event15_3</a></td> 
+  <td> <a href='event.php'>$event15_4</a></td> 
+  <td> <a href='event.php'>$event15_5</a></td> 
     </tr>
      <tr>
   <td>16h - 17h</td> 
-  <td> $event16_1</td>
-  <td> $event16_2</td> 
-  <td> $event16_3</td> 
-  <td> $event16_4</td> 
-  <td> $event16_5</td> 
+  <td> <a href='event.php'>$event16_1</a></td>
+  <td> <a href='event.php'>$event16_2</a></td> 
+  <td> <a href='event.php'>$event16_3</a></td> 
+  <td> <a href='event.php'>$event16_4</a></td> 
+  <td> <a href='event.php'>$event16_5</a></td> 
     </tr>
     <tr>
   <td>17h - 18h</td> 
-  <td> $event17_1</td>
-  <td> $event17_2</td> 
-  <td> $event17_3</td> 
-  <td> $event17_4</td> 
-  <td> $event17_5</td> 
+  <td> <a href='event.php'>$event17_1</a></td>
+  <td> <a href='event.php'>$event17_2</a></td> 
+  <td> <a href='event.php'>$event17_3</a></td> 
+  <td> <a href='event.php'>$event17_4</a></td> 
+  <td> <a href='event.php'>$event17_5</a></td> 
     </tr>
     <tr>
   <td>18h - 19h</td> 
-  <td> $event18_1</td>
-  <td> $event18_2</td> 
-  <td> $event18_3</td> 
-  <td> $event18_4</td> 
-  <td> $event18_5</td> 
+  <td> <a href='event.php'>$event18_1</a></td>
+  <td> <a href='event.php'>$event18_2</a></td> 
+  <td> <a href='event.php'>$event18_3</a></td> 
+  <td> <a href='event.php'>$event18_4</a></td> 
+  <td> <a href='event.php'>$event18_5</a></td> 
     </tr>
     </tbody>
   </table>

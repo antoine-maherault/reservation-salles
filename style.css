@@ -219,6 +219,10 @@ main a{
     text-decoration: none;
 }
 
+.planning a:visited{
+    color:blue;
+}
+
 .addEvent{
     background-color : rgb(165, 166, 252);
     width : 300px;
