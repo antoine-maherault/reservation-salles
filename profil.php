@@ -1,26 +1,22 @@
 <!DOCTYPE html>
 <html>
  <head>
- <title>The R00M</title>
+ <title>The R00M    </title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="style.css">
  </head>
-
 <body>
-<main>
 <?php 
 // DISPLAY PAGE IF CONNECTED
  session_start();
  if(isset($_SESSION['connected'])){
  ?>
-
 <header>
-
-<a href="index.php"> Home </a>
+   <a href="index.php"> Home </a> 
+   <?php include "header.php";?> 
+</header>
 <?php 
-
-include "header.php";
 
 //_________________connect to DB_________________//
 
@@ -46,7 +42,6 @@ $password=$user[0][2];
 
 ?>
 
-</header>
 <main>
 <div class="tsignin">
  <h3>Change your personnal informations</h3>
@@ -160,7 +155,6 @@ if(isset($_SESSION['update']) && $_SESSION['update'] <= 2 ){ //feedback
 }
 
 ?>
-</main>
 <footer>
 <div class="square">
     <a href="https://github.com/antoine-maherault/livre-or"> Github </a> 

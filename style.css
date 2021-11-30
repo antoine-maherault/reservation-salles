@@ -101,7 +101,6 @@ a:visited:hover {
     align-items:center;
     height: 200px;
     font-size : 65px;   
-
 }
 
 .myform {
@@ -123,7 +122,6 @@ a:visited:hover {
     justify-content:  center;
     align-items:center;
     background-color : rgb(173, 174, 252);
-
 }
 
 .myform2 {
@@ -160,28 +158,24 @@ a:visited:hover {
     background-color:lavenderblush;
     font-family : monospace;
     font-size: 20px;
-    width : 900px;
     border: 2px solid black;
 }
 
 td {
   border: 1px solid black;
-  width: 100px;
+  width: 190px;
+  table-layout: fixed;
   overflow: hidden;
+  text-align: center;
+  font-size : 18px;
 }
 
-td{
+tr{
     text-align: center;
-    font-size : 18px;
-}
+    height : 40px;
+    overflow: hidden;
+    table-layout: fixed;
 
-.comment{
-    background-color : rgb(142, 144, 252);
-    width : 230px;
-    display : flex;
-    flex-direction : column;
-    align-items : left;
-    padding : 10px;
 }
 
 .weekSelect form{
@@ -211,8 +205,8 @@ footer a {
     text-align : center;
     font-family:monospace;
     justify-content: center;
-    margin-top : -30px;
     text-decoration: none;
+    padding : 10px;
 }
 
 main a{
@@ -237,7 +231,24 @@ main a{
 .evlink:visited{
     color:white;
 }
-/*______________ Réservation ______________*/
+
+.reza {
+    border: none;
+    background-color: transparent;
+    color : blue;
+    font-family: monospace;
+    font-size : 17px;
+    cursor: pointer;
+}
+
+/*______________ Reservation form ______________*/
+
+main {
+    display : flex;
+    flex-direction : column;
+    justify-content: center;
+    align-items: center;
+}
 
 .booking_container{
     display : flex;
@@ -246,6 +257,9 @@ main a{
     align-items: center;
     font-family: monospace;
     font-size : 15px;
+    width : 300px;
+    font-size : 17px;
+    background-color:lavenderblush;
 }
 
 .booking_container form{
@@ -254,26 +268,12 @@ main a{
     width : 200px;
     background-color:lavenderblush;
     padding: 10px;
+    line-height: 26px;
 
-}
-.commentsA{
-    display : flex;
-    flex-direction : column;
-    align-items : center;
-    gap : 10px;
-}
-.commentA{
-    background-color : rgb(142, 144, 252);
-    width : 600px;
-    display : flex;
-    flex-direction : column;
-    align-items : center;
-    padding : 10px;
 }
 
 .desc{
     height : 100px;
-    text-align : center;
 }
 
 .book{
@@ -286,9 +286,18 @@ main a{
     text-align: center ;
     justify-content: center; 
     background-color : rgb(228, 220, 252);
-
+    height : 30px;
 }
 
 .book:hover{
     background-color : rgb(215, 195, 248);
+}
+
+.tsigni{
+    display : flex;
+    flex-direction: column;
+    justify-content:  center;
+    align-items:center;
+    height: 150px;
+    font-size : 65px;   
 }

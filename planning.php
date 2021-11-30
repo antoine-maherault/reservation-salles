@@ -27,6 +27,14 @@ $sql = "SELECT * FROM reservations" ;
 $query = $conn->query($sql);
 $events = $query->fetch_all();
 
+//_________________ get USERNAME  _________________//
+
+// get LOGIN from utilisateurs and reservations
+
+$sql = "SELECT utilisateurs.login FROM utilisateurs INNER JOIN reservations ON reservations.id_utilisateur = utilisateurs.id" ;
+$query = $conn->query($sql);
+$users = $query->fetch_all();
+
 //_________________change WEEKS_________________//
 
 /////////////// InitWeekNum /////////////// 
@@ -51,7 +59,7 @@ function getStartAndEndDate($week, $year) {
 
 $week_array = getStartAndEndDate($_SESSION['week'],date("Y"));
 
-/////////////// Change WeekStart and WeekEnd when with ARROW /////////////// 
+/////////////// Change WeekStart and WeekEnd when hit ARROW /////////////// 
 
 if($_POST['lweek'] == "<" && $_SESSION['week']>$_SESSION['week_i']){
   header("Location:planning.php");
@@ -63,13 +71,17 @@ if($_POST['nweek'] == ">"){
   $_SESSION['week'] ++;
 }
 
-if($_SERVER['PHP_SELF']!="/reservation-salles/planning.php"){
-  echo "hey";
-}
-
 /////////////// Display Event /////////////// 
 
-foreach($events as $event){
+foreach($events as $event){ 
+ 
+  // get username for event 
+  $u_login = $event[5];
+  $sql = "SELECT utilisateurs.login FROM utilisateurs INNER JOIN reservations ON reservations.id_utilisateur = utilisateurs.id WHERE reservations.id_utilisateur = $u_login" ;
+  $query = $conn->query($sql);
+  $username = $query->fetch_all();
+  $username = $username[0][0];
+
   // create date of event (format)
   $date_event = date_create($event[3]);
   $date_event = date_format($date_event, 'd-m-Y');
@@ -85,8 +97,10 @@ foreach($events as $event){
 
   if(strtotime($date_event) >= strtotime($week_array['week_start']) && strtotime($date_event) <= strtotime($week_array['week_end'])){
     $hour_event=ltrim($hour_event,'0');
-    $ev = "event".$hour_event."_".$day_event; 
-    $$ev = $event[1];       
+    $ev = "event".$hour_event."_".$day_event;  
+    $$ev = $event[1].' '.$username;
+    $evID = "event".$hour_event."_".$day_event."_ID"; 
+    $$evID = $event[0];
   }
 }
 
@@ -101,7 +115,7 @@ echo "
   </div>";
 
 echo"
-<form method = 'get'>
+<form action = 'event.php' method = 'get'>
 <table class='planning'>
   <thead>
   <th> Horaires </th>
@@ -114,90 +128,90 @@ echo"
   <tbody>
   <tr>
   <td>08h - 09h</td> 
-  <td> <a href='event.php'>$event8_1</a></td>
-  <td> <a href='event.php'>$event8_2</a></td> 
-  <td> <a href='event.php'>$event8_3</a></td> 
-  <td> <a href='event.php'>$event8_4</a></td> 
-  <td> <a href='event.php'>$event8_5</a></td> 
+  <td> <input name = '$event8_1_ID' class ='reza' type='submit' value='$event8_1'></input></td> 
+  <td> <input name = '$event8_2_ID' class ='reza' type='submit' value='$event8_2'></input></td> 
+  <td> <input name = '$event8_3_ID' class ='reza' type='submit' value='$event8_3'></input></td> 
+  <td> <input name = '$event8_4_ID' class ='reza' type='submit' value='$event8_4'></input></td> 
+  <td> <input name = '$event8_5_ID' class ='reza' type='submit' value='$event8_5'></input></td> 
     </tr>
   <tr>
   <td>09h - 10h</td> 
-  <td> <a href='event.php'>$event9_1</a></td>
-  <td> <a href='event.php'>$event9_2</a></td> 
-  <td> <a href='event.php'>$event9_3</a></td> 
-  <td> <a href='event.php'>$event9_4</a></td> 
-  <td> <a href='event.php'>$event9_5</a></td> 
+  <td> <input name = '$event9_1_ID' class ='reza' type='submit' value='$event9_1'></input></td> 
+  <td> <input name = '$event9_2_ID' class ='reza' type='submit' value='$event9_2'></input></td> 
+  <td> <input name = '$event9_3_ID' class ='reza' type='submit' value='$event9_3'></input></td> 
+  <td> <input name = '$event9_4_ID' class ='reza' type='submit' value='$event9_4'></input></td> 
+  <td> <input name = '$event9_5_ID' class ='reza' type='submit' value='$event9_5'></input></td> 
     </tr>
      <tr>
   <td>10h - 11h</td> 
-  <td> <a href='event.php'>$event10_1</a></td>
-  <td> <a href='event.php'>$event10_2</a></td> 
-  <td> <a href='event.php'>$event10_3</a></td> 
-  <td> <a href='event.php'>$event10_4</a></td> 
-  <td> <a href='event.php'>$event10_5</a></td> 
+  <td> <input name = '$event10_1_ID' class ='reza' type='submit' value='$event10_1'></input></td> 
+  <td> <input name = '$event10_2_ID' class ='reza' type='submit' value='$event10_2'></input></td> 
+  <td> <input name = '$event10_3_ID' class ='reza' type='submit' value='$event10_3'></input></td> 
+  <td> <input name = '$event10_4_ID' class ='reza' type='submit' value='$event10_4'></input></td> 
+  <td> <input name = '$event10_5_ID' class ='reza' type='submit' value='$event10_5'></input></td> 
     </tr>
    <tr>
   <td>11h - 12h</td> 
-  <td> <a href='event.php'>$event11_1</a></td>
-  <td> <a href='event.php'>$event11_2</a></td> 
-  <td> <a href='event.php'>$event11_3</a></td> 
-  <td> <a href='event.php'>$event11_4</a></td> 
-  <td> <a href='event.php'>$event11_5</a></td> 
+  <td> <input name = '$event11_1_ID' class ='reza' type='submit' value='$event11_1'></input></td> 
+  <td> <input name = '$event11_2_ID' class ='reza' type='submit' value='$event11_2'></input></td> 
+  <td> <input name = '$event11_3_ID' class ='reza' type='submit' value='$event11_3'></input></td> 
+  <td> <input name = '$event11_4_ID' class ='reza' type='submit' value='$event11_4'></input></td> 
+  <td> <input name = '$event11_5_ID' class ='reza' type='submit' value='$event11_5'></input></td> 
     </tr>
      <tr>
   <td>12h - 13h</td>
-  <td> <a href='event.php'>$event12_1</a></td>
-  <td> <a href='event.php'>$event12_2</a></td> 
-  <td> <a href='event.php'>$event12_3</a></td> 
-  <td> <a href='event.php'>$event12_4</a></td> 
-  <td> <a href='event.php'>$event12_5</a></td>  
+  <td> <input name = '$event12_1_ID' class ='reza' type='submit' value='$event12_1'></input></td> 
+  <td> <input name = '$event12_2_ID' class ='reza' type='submit' value='$event12_2'></input></td> 
+  <td> <input name = '$event12_3_ID' class ='reza' type='submit' value='$event12_3'></input></td> 
+  <td> <input name = '$event12_4_ID' class ='reza' type='submit' value='$event12_4'></input></td> 
+  <td> <input name = '$event12_5_ID' class ='reza' type='submit' value='$event12_5'></input></td> 
     </tr>
   <td>13h - 14h</td> 
-  <td> <a href='event.php'>$event13_1</a></td>
-  <td> <a href='event.php'>$event13_2</a></td> 
-  <td> <a href='event.php'>$event13_3</a></td> 
-  <td> <a href='event.php'>$event13_4</a></td> 
-  <td> <a href='event.php'>$event13_5</a></td> 
+  <td> <input name = '$event13_1_ID' class ='reza' type='submit' value='$event13_1'></input></td> 
+  <td> <input name = '$event13_2_ID' class ='reza' type='submit' value='$event13_2'></input></td> 
+  <td> <input name = '$event13_3_ID' class ='reza' type='submit' value='$event13_3'></input></td> 
+  <td> <input name = '$event13_4_ID' class ='reza' type='submit' value='$event13_4'></input></td> 
+  <td> <input name = '$event13_5_ID' class ='reza' type='submit' value='$event13_5'></input></td> 
     </tr>
     <tr>
   <td>14h - 15h</td> 
-  <td> <a href='event.php'>$event14_1</a></td>
-  <td> <a href='event.php'>$event14_2</a></td> 
-  <td> <a href='event.php'>$event14_3</a></td> 
-  <td> <a href='event.php'>$event14_4</a></td> 
-  <td> <a href='event.php'>$event14_5</a></td> 
+  <td> <input name = '$event14_1_ID' class ='reza' type='submit' value='$event14_1'></input></td> 
+  <td> <input name = '$event14_2_ID' class ='reza' type='submit' value='$event14_2'></input></td> 
+  <td> <input name = '$event14_3_ID' class ='reza' type='submit' value='$event14_3'></input></td> 
+  <td> <input name = '$event14_4_ID' class ='reza' type='submit' value='$event14_4'></input></td> 
+  <td> <input name = '$event14_5_ID' class ='reza' type='submit' value='$event14_5'></input></td> 
     </tr>
    <tr>
   <td>15h - 16h</td> 
-  <td> <a href='event.php'>$event15_1</a></td>
-  <td> <a href='event.php'>$event15_2</a></td> 
-  <td> <a href='event.php'>$event15_3</a></td> 
-  <td> <a href='event.php'>$event15_4</a></td> 
-  <td> <a href='event.php'>$event15_5</a></td> 
+  <td> <input name = '$event15_1_ID' class ='reza' type='submit' value='$event15_1'></input></td> 
+  <td> <input name = '$event15_2_ID' class ='reza' type='submit' value='$event15_2'></input></td> 
+  <td> <input name = '$event15_3_ID' class ='reza' type='submit' value='$event15_3'></input></td> 
+  <td> <input name = '$event15_4_ID' class ='reza' type='submit' value='$event15_4'></input></td> 
+  <td> <input name = '$event15_5_ID' class ='reza' type='submit' value='$event15_5'></input></td> 
     </tr>
      <tr>
   <td>16h - 17h</td> 
-  <td> <a href='event.php'>$event16_1</a></td>
-  <td> <a href='event.php'>$event16_2</a></td> 
-  <td> <a href='event.php'>$event16_3</a></td> 
-  <td> <a href='event.php'>$event16_4</a></td> 
-  <td> <a href='event.php'>$event16_5</a></td> 
+  <td> <input name = '$event16_1_ID' class ='reza' type='submit' value='$event16_1'></input></td> 
+  <td> <input name = '$event16_2_ID' class ='reza' type='submit' value='$event16_2'></input></td> 
+  <td> <input name = '$event16_3_ID' class ='reza' type='submit' value='$event16_3'></input></td> 
+  <td> <input name = '$event16_4_ID' class ='reza' type='submit' value='$event16_4'></input></td> 
+  <td> <input name = '$event16_5_ID' class ='reza' type='submit' value='$event16_5'></input></td> 
     </tr>
     <tr>
   <td>17h - 18h</td> 
-  <td> <a href='event.php'>$event17_1</a></td>
-  <td> <a href='event.php'>$event17_2</a></td> 
-  <td> <a href='event.php'>$event17_3</a></td> 
-  <td> <a href='event.php'>$event17_4</a></td> 
-  <td> <a href='event.php'>$event17_5</a></td> 
+  <td> <input name = '$event17_1_ID' class ='reza' type='submit' value='$event17_1'></input></td> 
+  <td> <input name = '$event17_2_ID' class ='reza' type='submit' value='$event17_2'></input></td> 
+  <td> <input name = '$event17_3_ID' class ='reza' type='submit' value='$event17_3'></input></td> 
+  <td> <input name = '$event17_4_ID' class ='reza' type='submit' value='$event17_4'></input></td> 
+  <td> <input name = '$event17_5_ID' class ='reza' type='submit' value='$event17_5'></input></td> 
     </tr>
     <tr>
   <td>18h - 19h</td> 
-  <td> <a href='event.php'>$event18_1</a></td>
-  <td> <a href='event.php'>$event18_2</a></td> 
-  <td> <a href='event.php'>$event18_3</a></td> 
-  <td> <a href='event.php'>$event18_4</a></td> 
-  <td> <a href='event.php'>$event18_5</a></td> 
+  <td> <input name = '$event18_1_ID' class ='reza' type='submit' value='$event18_1'></input></td> 
+  <td> <input name = '$event18_2_ID' class ='reza' type='submit' value='$event18_2'></input></td> 
+  <td> <input name = '$event18_3_ID' class ='reza' type='submit' value='$event18_3'></input></td> 
+  <td> <input name = '$event18_4_ID' class ='reza' type='submit' value='$event18_4'></input></td> 
+  <td> <input name = '$event18_5_ID' class ='reza' type='submit' value='$event18_5'></input></td> 
     </tr>
     </tbody>
   </table>

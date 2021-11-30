@@ -27,7 +27,7 @@
     </form>
 </div>
 </main>
- <?php 
+<?php 
 
 // Variables form // 
 
