@@ -157,7 +157,7 @@ if(isset($_SESSION['update']) && $_SESSION['update'] <= 2 ){ //feedback
 ?>
 <footer>
 <div class="square">
-    <a href="https://github.com/antoine-maherault/livre-or"> Github </a> 
+    <a href="https://github.com/antoine-maherault/reservation-salles"> Github </a> 
   </div>   
 </footer>
 

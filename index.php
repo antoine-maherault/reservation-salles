@@ -16,7 +16,7 @@
   </main>
   <footer>
     <div class="square">
-      <a href="https://github.com/antoine-maherault/livre-or"> Github </a> 
+      <a href="https://github.com/antoine-maherault/reservation-salles"> Github </a> 
     </div>    
   </footer>
 </body>
