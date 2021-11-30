@@ -8,5 +8,6 @@
    // Create connection
 
    $conn = new mysqli($servername, $username, $password, 'antoine-maherault_reservationsalles');
+   mysqli_set_charset($conn,'utf8');
 ?>
 
