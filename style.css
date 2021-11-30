@@ -232,6 +232,10 @@ main a{
     color:white;
 }
 
+.evlink:visited{
+    color:white;
+}
+
 .reza {
     border: none;
     background-color: transparent;
