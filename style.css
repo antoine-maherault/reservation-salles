@@ -229,6 +229,10 @@ main a{
     color : white;
 }
 
+.addEvent:hover{
+    color : black;
+}
+
 .evlink:visited{
     color:white;
 }
