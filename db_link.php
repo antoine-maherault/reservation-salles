@@ -1,9 +1,9 @@
 <?php 
    //_________________connect to SQL_________________//
 
-   $servername = "localhost";
-   $username = "root";
-   $password = "root";
+   $servername = "localhost:3306";
+   $username = "root__";
+   $password = "root__";
 
    // Create connection
 
