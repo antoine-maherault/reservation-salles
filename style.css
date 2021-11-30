@@ -226,10 +226,7 @@ main a{
     border-right: 4px solid #666666;
     border-bottom: 4px solid #666666;
     border-left: 3px solid #CCCCCC;
-}
-
-.evlink:visited{
-    color:white;
+    color : white;
 }
 
 .evlink:visited{
