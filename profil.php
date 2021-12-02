@@ -65,96 +65,97 @@ $password=$user[0][2];
 
  <?php 
 
-//_________________Change USER Details_________________// 
+///_________________Change USER Details_________________// 
 
 if(isset($_SESSION["connected"])){
-if($_POST["submit1"]=="Envoyer"){ //update fname + lname + login
-    if ($login == NULL && $prenom == NULL && $nom == NULL){}
-    else {
-        $login=trim($_POST["login"]);
-        $prenom=trim($_POST["fname"]);
-        $nom=trim($_POST["lname"]);
-        if($login == NULL||$prenom == NULL||$nom == NULL){
-            if($login == NULL){
-            $_SESSION['update'] = 0;
-            echo "
-            <style>
-            input[name='login'] {
-                background-color: #FFBBBB ;
-            }
-            </style>         
-            ";}
-            if($prenom == NULL){
-               $_SESSION['update'] = 0;
+    if($_POST["submit1"]=="Envoyer"){ //update fname + lname + login
+        if ($login == NULL && $prenom == NULL && $nom == NULL){}
+        else {
+            $login=trim($_POST["login"]);
+            $prenom=trim($_POST["fname"]);
+            $nom=trim($_POST["lname"]);
+            if($login == NULL||$prenom == NULL||$nom == NULL){
+                if($login == NULL){
+                $_SESSION['update'] = 0;
                 echo "
                 <style>
-                input[name='fname'] {
-                background-color: #FFBBBB ;
+                input[name='login'] {
+                    background-color: #FFBBBB ;
                 }
                 </style>         
-                ";        }
-            if($nom == NULL){
-               $_SESSION['update'] = 0;
-                echo "
-                <style>
-                input[name='lname'] {
-                background-color: #FFBBBB ;
+                ";}
+                if($prenom == NULL){
+                   $_SESSION['update'] = 0;
+                    echo "
+                    <style>
+                    input[name='fname'] {
+                    background-color: #FFBBBB ;
+                    }
+                    </style>         
+                    ";        }
+                if($nom == NULL){
+                   $_SESSION['update'] = 0;
+                    echo "
+                    <style>
+                    input[name='lname'] {
+                    background-color: #FFBBBB ;
+                    }
+                    </style>         
+                    ";        }
+                $_SESSION['update'] = 3;
+            }
+            else{
+                foreach($users as $users){   // check if Login already exists
+                    if ( isset($_POST["login"]) && $_POST["login"] == $users[1] && $_POST["login"] !=$user[0][1]){
+                      echo "<p id='update'>login alreay taken</p>";
+                      $taken = 1;
+                      $_SESSION['update'] = 0;
+                    }
                 }
-                </style>         
-                ";        }
-            $_SESSION['update'] = 3;
-        }
-        else{
-            foreach($users as $users){   // check if Login already exists
-                if ( isset($_POST["login"]) && $_POST["login"] == $users[1] && $_POST["login"] !=$user[0][1]){
-                  echo "<p id='update'>login alreay taken</p>";
-                  $taken = 1;
-                  $_SESSION['update'] = 0;
+                if($taken == false){ // update user infos 
+                    $u_login = $user[0][1];
+                    $sql = "UPDATE `utilisateurs` SET prenom = '$prenom', login = '$login', nom ='$nom' WHERE login = '$u_login'";
+                    $query = $conn->query($sql);
+                    $_SESSION['connected'] = $login;
+                    header("Location:profil.php");
+                    $_SESSION['update'] = 1;
                 }
             }
-            if($taken == false){ // update user infos 
-                $u_login = $user[0][1];
-                $sql = "UPDATE `utilisateurs` SET prenom = '$prenom', login = '$login', nom ='$nom' WHERE login = '$u_login'";
-                $query = $conn->query($sql);
-                $_SESSION['connected'] = $login;
-                header("Location:profil.php");
-                $_SESSION['update'] = 1;
-            }
         }
+    } 
     }
-} 
-}
-
-if(isset($_SESSION["connected"])){
-if($_POST["submit2"]=="Envoyer"){ //update password
-   $password1=$_POST["password1"];
-   $password2=$_POST["password2"];
-   $_SESSION['update'] = 0;
-
-   if (password_verify($_POST['password1'],$password)){ // verify old password + update
-      $password2 = password_hash($password2, PASSWORD_BCRYPT);
-      $u_login = $user[0][1];
-      $sql = "UPDATE `utilisateurs` SET password = '$password2'WHERE login = '$u_login'";
-      $query = $conn->query($sql);
-      $_SESSION['connected'] = $login;
-      header("Location:profil.php");
-      $_SESSION['update'] = 1;
-   } 
-   else{
-      echo "<p id='update'>wrong password</p>";
-      $_SESSION['update'] = 3;
-   }
-}
-}
-
-if(isset($_SESSION["connected"])){
-if(isset($_SESSION['update']) && $_SESSION['update'] <= 2 ){ //feedback
-   echo "<p id='update'>update successful</p>   ";
-   $_SESSION['update'] ++;
-}
-}
-
-?>
+    
+    if(isset($_SESSION["connected"])){
+    if($_POST["submit2"]=="Envoyer"){ //update password
+       $password1=$_POST["password1"];
+       $password2=$_POST["password2"];
+       $_SESSION['update'] = 0;
+    
+       if (password_verify($_POST['password1'],$password)){ // verify old password + update
+          $password2 = password_hash($password2, PASSWORD_BCRYPT);
+          $u_login = $user[0][1];
+          $sql = "UPDATE `utilisateurs` SET password = '$password2'WHERE login = '$u_login'";
+          $query = $conn->query($sql);
+          $_SESSION['connected'] = $login;
+          header("Location:profil.php");
+          $_SESSION['update'] = 1;
+       } 
+       else{
+          echo "<p id='update'>wrong password</p>";
+          $_SESSION['update'] = 3;
+       }
+    }
+    }
+    
+    if(isset($_SESSION["connected"])){
+    if(isset($_SESSION['update']) && $_SESSION['update'] <= 2 ){ //feedback
+       echo "<p id='update'>update successful</p>   ";
+       $_SESSION['update'] ++;
+    }
+    }
+    
+    ?>
+    
 <footer>
 <div class="square">
     <a href="https://github.com/antoine-maherault/reservation-salles"> Github </a> 
