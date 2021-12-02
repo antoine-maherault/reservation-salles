@@ -27,7 +27,7 @@
 
    //_________________reset date PLANNING_________________//
 
-   if($_SERVER['PHP_SELF']!="/reservation-salles/planning.php"){
+   if($_SERVER['PHP_SELF']!="planning.php"){
       $_SESSION["init"] = 0;
     }
 ?>
